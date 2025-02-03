@@ -6,8 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -32,8 +34,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ShoppingCartScreen() {
     val cartItems = listOf(
-        CartItem("Laptop", 999.99, 1),
-        CartItem("Smartphone", 699.99, 2),
+        CartItem("Laptop", 1599.99, 1),
+        CartItem("Smartphone", 599.99, 2),
         CartItem("Headphones", 199.99, 1)
     )
 
@@ -41,16 +43,35 @@ fun ShoppingCartScreen() {
     val totalCost = cartItems.sumOf { it.price * it.quantity }
 
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-    ) {
-        Text(
-            text = "Shopping Cart",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+
+    )
+    {
+        // Title with Shopping Cart Icon
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(
+                imageVector = Icons.Default.ShoppingCart,
+                contentDescription = "Shopping Cart",
+                tint = Color.Black,
+                modifier = Modifier.size(28.dp)
+            )
+
+            Spacer(modifier = Modifier.width(8.dp)) // Space between icon and text
+
+            Text(
+                text = "Shopping Cart",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Display Cart Items
         cartItems.forEach { item ->
